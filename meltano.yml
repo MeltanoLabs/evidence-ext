@@ -32,10 +32,14 @@ plugins:
         - name: settings.duckdb.filename
           env: DUCKDB_FILENAME
           value: needful_things.duckdb  # sample project value
+        - name: settings.duckdb.gitignore_duckdb
+          value: DUCKDB_GITIGNOREDUCKDB
         # sqlite
         - name: settings.sqlite.filename
           env: SQLITE_FILENAME
         # bigquery
+        - name: settings.bigquery.project_id
+          env: BIGQUERY_PROJECT_ID
         - name: settings.bigquery.client_email
           env: BIGQUERY_CLIENT_EMAIL
         - name: settings.bigquery.private_key

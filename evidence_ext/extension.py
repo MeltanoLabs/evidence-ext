@@ -11,6 +11,8 @@ from meltano.edk import models
 from meltano.edk.extension import ExtensionBase
 from meltano.edk.process import Invoker, log_subprocess_error
 
+from .config import EvidenceConfig
+
 log = structlog.get_logger()
 
 
@@ -29,6 +31,7 @@ class Evidence(ExtensionBase):
                 "EVIDENCE_HOME not found in environment, unable to function without it"
             )
             sys.exit(1)
+        self.config = EvidenceConfig(evidence_home=self.evidence_home)
         self.npm = Invoker("npm")
         self.npx = Invoker("npx")
 
@@ -71,10 +74,12 @@ class Evidence(ExtensionBase):
 
     def build(self):
         """Run 'npm run build' in the Evidence home dir."""
-        self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
-        self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
+        with self.config.suppress_config_file():
+            self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
+            self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
 
     def dev(self):
         """Run 'npm run dev' in the Evidence home dir."""
-        self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
-        self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
+        with self.config.suppress_config_file():
+            self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
+            self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
