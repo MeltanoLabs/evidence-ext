@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier
+_commit: v0.1.0
+_src_path: gh:meltano/edk
+admin_name: Ken Payne
+cli_prefix: evidence
+extension_description: A meltano utility extension for Evidence.
+extension_id: evidence-ext
+extension_name: Evidence
+extension_name_lower: evidence
+library_name: evidence_ext
+wrapper_target_name: npm
