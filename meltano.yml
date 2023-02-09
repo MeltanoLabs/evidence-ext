@@ -30,6 +30,9 @@ plugins:
         # duckdb
         - name: settings.duckdb.filename
           env: DUCKDB_FILENAME
+        # sqlite
+        - name: settings.sqlite.filename
+          env: SQLITE_FILENAME
         # bigquery
         - name: settings.bigquery.client_email
           env: BIGQUERY_CLIENT_EMAIL
