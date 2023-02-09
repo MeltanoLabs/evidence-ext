@@ -13,7 +13,7 @@ jobs:
         run: |
           pip install pipx
           pipx install meltano
-      - name: Install Meltano project
+      - name: Install Meltano Project
         run: meltano install
-      - name: Test Evidence Sample
-        run: meltano --environment=test invoke evidence build
+      - name: Test Evidence Sample Build
+        run: meltano --environment=test --log-level=debug invoke evidence build
