@@ -42,4 +42,7 @@ plugins:
         settings.database: duckdb
         settings.credentials.filename: needful_things.duckdb
         settings.credentials.gitignore_duckdb: null
-environments: []
+environments:
+  - name: dev
+  - name: staging
+  - name: prod
