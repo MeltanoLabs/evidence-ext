@@ -1,0 +1,19 @@
+name: test-evidence
+on: [push]
+jobs:
+  test-evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install Meltano
+        run: |
+          pip install pipx
+          pipx install meltano
+      - name: Install Meltano project
+        run: meltano install
+      - name: Test Evidence Sample
+        run: meltano --environment=test invoke evidence build

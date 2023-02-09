@@ -1,10 +1,6 @@
 version: 1
 default_environment: dev
 project_id: meltanolabs-evidence-ext
-environments:
-- name: dev
-- name: staging
-- name: prod
 plugins:
   utilities:
     - name: evidence
@@ -29,5 +25,19 @@ plugins:
           env: EVIDENCE_HOME
           description: |
             The directory where Evidence will store its project, configuration, logs, and other files.
+      settings_group_validation:
+        - - evidence_home
       config:
         evidence_home: sample/
+environments:
+- name: dev
+- name: test
+  config:
+    plugins:
+      utilities:
+        - name: evidence
+          env:
+            DATABASE: duckdb
+            DUCKDB_FILENAME: needful_things.duckdb
+            DUCKDB_GITIGNOREDUCKDB: null
+- name: prod
