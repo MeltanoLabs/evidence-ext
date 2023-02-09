@@ -1,3 +1,10 @@
+"""This is not used.
+
+Started along the path to manage (overwrite) `evidence.settings.json`,
+but its heavy-handed, and may not be necessary unless there are settings
+not accessible via env vars (TBD).
+"""
+
 import contextlib
 import json
 import os
@@ -86,16 +93,3 @@ class EvidenceConfig:
                 "private_key": os.environ["EVIDENCE_CREDENTIALS_PRIVATE_KEY"],
             },
         }
-
-    def _get_config_mysql(self):
-        """Get config for mysql."""
-        self._check_required_env_vars(
-            [
-                "EVIDENCE_CREDENTIALS_",
-                "EVIDENCE_CREDENTIALS_",
-                "EVIDENCE_CREDENTIALS_",
-                "EVIDENCE_CREDENTIALS_",
-                "EVIDENCE_CREDENTIALS_",
-                "EVIDENCE_CREDENTIALS_",
-            ]
-        )
