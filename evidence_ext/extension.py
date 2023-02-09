@@ -2,10 +2,8 @@
 from __future__ import annotations
 
 import os
-import pkgutil
 import subprocess
 import sys
-from pathlib import Path
 from typing import Any
 
 import structlog
@@ -23,7 +21,7 @@ class Evidence(ExtensionBase):
         """Initialize the extension."""
         self.app_name = "evidence_extension"
         self.evidence_home = os.environ.get("EVIDENCE_HOME") or os.environ.get(
-            f"{self.app_name}_EVIDENCE_HOME"
+            "EVIDENCE_HOME_DIR"
         )
         if not self.evidence_home:
             log.debug("env dump", env=os.environ)
@@ -72,9 +70,11 @@ class Evidence(ExtensionBase):
         )
 
     def build(self):
+        """Run 'npm run build' in the Evidence home dir."""
         self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
         self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
 
     def dev(self):
+        """Run 'npm run dev' in the Evidence home dir."""
         self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
         self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
