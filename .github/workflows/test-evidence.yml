@@ -1,7 +1,7 @@
 name: test-evidence
 on: [push]
 jobs:
-  test-evidence:
+  build-sample-project:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
