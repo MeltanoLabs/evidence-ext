@@ -27,16 +27,31 @@ plugins:
             The directory where Evidence will store its project, configuration, logs, and other files.
         - name: settings.database
           env: EVIDENCE_DATABASE
+        # duckdb & sqlite
         - name: settings.credentials.filename
           env: EVIDENCE_CREDENTIALS_FILENAME
         - name: settings.credentials.gitignore_duckdb
           env: EVIDENCE_CREDENTIALS_GITIGNORE_DUCKDB
+        # bigquery
+        - name: settings.credentials.client_email
+          env: EVIDENCE_CREDENTIALS_CLIENT_EMAIL
+        - name: settings.credentials.private_key
+          env: EVIDENCE_CREDENTIALS_PRIVATE_KEY
+        #
       settings_group_validation:
         - - home
-        # duckdb
+        # duckdb & sqlite
         - - home
           - settings.database
           - settings.credentials.filename
+        # bigquery
+        - - home
+          - settings.database
+          - settings.credentials.client_email
+          - settings.credentials.private_key
+        # mysql
+        - - home
+          - settings.database
       config:
         home_dir: $MELTANO_PROJECT_ROOT/sample/
         settings.database: duckdb

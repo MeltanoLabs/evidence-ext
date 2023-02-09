@@ -1,19 +1,17 @@
 """Meltano Evidence extension."""
 from __future__ import annotations
 
-import contextlib
-import json
 import os
-import pkgutil
 import subprocess
 import sys
-from pathlib import Path
 from typing import Any
 
 import structlog
 from meltano.edk import models
 from meltano.edk.extension import ExtensionBase
 from meltano.edk.process import Invoker, log_subprocess_error
+
+from .config import EvidenceConfig
 
 log = structlog.get_logger()
 
@@ -33,48 +31,9 @@ class Evidence(ExtensionBase):
                 "EVIDENCE_HOME not found in environment, unable to function without it"
             )
             sys.exit(1)
-
-        self.evidence_config_file = (
-            Path(self.evidence_home)
-            / ".evidence"
-            / "template"
-            / "evidence.settings.json"
-        )
-
+        self.config = EvidenceConfig(self.evidence_home)
         self.npm = Invoker("npm")
         self.npx = Invoker("npx")
-
-    def _get_config_duckdb(self):
-        return {
-            "database": "duckdb",
-            "credentials": {
-                "filename": os.environ["EVIDENCE_CREDENTIALS_FILENAME"],
-                "gitignoreDuckdb": os.environ.get(
-                    "EVIDENCE_CREDENTIALS_GITIGNORE_DUCKDB"
-                ),
-            },
-        }
-
-    def _get_config(self):
-        database = os.environ["EVIDENCE_DATABASE"]
-        if database == "duckdb":
-            return self._get_config_duckdb()
-        else:
-            raise KeyError(
-                f"Database connection {database} is not yet supported by evidence-ext."
-            )
-
-    def _write_config(self):
-        """Write Evidence config from env vars."""
-        self.evidence_config_file.parent.mkdir(parents=True, exist_ok=True)
-        config = self._get_config()
-        with self.evidence_config_file.open("w", encoding="utf-8") as cf:
-            json.dump(config, cf)
-
-    def _cleanup_config(self):
-        """To prevent secrets leaking."""
-        if self.evidence_config_file.exists():
-            os.remove(self.evidence_config_file)
 
     def initialize(self, force: bool):
         """Initialize a new project."""
@@ -113,18 +72,14 @@ class Evidence(ExtensionBase):
             ]
         )
 
-    @contextlib.contextmanager
-    def config_file(self):
-        self._write_config()
-        yield
-        self._cleanup_config()
-
     def build(self):
-        with self.config_file():
+        """Run 'npm run build' in the Evidence home dir."""
+        with self.config.config_file():
             self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
             self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
 
     def dev(self):
-        with self.config_file():
+        """Run 'npm run dev' in the Evidence home dir."""
+        with self.config.config_file():
             self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
             self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
