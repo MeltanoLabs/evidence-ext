@@ -35,7 +35,7 @@ class Evidence(ExtensionBase):
         self.npm = Invoker("npm")
         self.npx = Invoker("npx")
 
-    def _get_connection_duckdb(self):
+    def _get_config_duckdb(self):
         return {
             "database": "duckdb",
             "credentials": {
@@ -64,7 +64,7 @@ class Evidence(ExtensionBase):
         )
         config_file.parent.mkdir(parents=True, exist_ok=True)
         config = self._get_config()
-        with config_file.open("r") as cf:
+        with config_file.open("w", encoding="utf-8") as cf:
             json.dump(config, cf)
 
     def initialize(self, force: bool):
