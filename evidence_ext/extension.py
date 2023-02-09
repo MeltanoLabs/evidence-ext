@@ -19,8 +19,6 @@ log = structlog.get_logger()
 class Evidence(ExtensionBase):
     """Extension implementing the ExtensionBase interface."""
 
-    _invokers = {}
-
     def __init__(self) -> None:
         """Initialize the extension."""
         self.app_name = "evidence_extension"
@@ -33,18 +31,15 @@ class Evidence(ExtensionBase):
                 "EVIDENCE_HOME not found in environment, unable to function without it"
             )
             sys.exit(1)
-
-    def get_invoker(self, command_name):
-        assert command_name in ("npm", "npx"), f"Command {command_name} not supported."
-        if command_name not in self._invokers:
-            self._invokers[command_name] = Invoker(command_name)
-        return self._invokers[command_name]
+        self.npm = Invoker("npm")
+        self.npx = Invoker("npx")
 
     def initialize(self, force: bool):
         """Initialize a new project."""
-        npx = self.get_invoker("npx")
         try:
-            npx.run_and_log(*["degit", "evidence-dev/template", self.evidence_home])
+            self.npx.run_and_log(
+                *["degit", "evidence-dev/template", self.evidence_home]
+            )
         except subprocess.CalledProcessError as err:
             log_subprocess_error("npx degit", err, "npx degit failed")
             sys.exit(err.returncode)
@@ -57,7 +52,7 @@ class Evidence(ExtensionBase):
             command_args: The arguments to pass to the command.
         """
         try:
-            self.get_invoker("npm").run_and_log(*command_args)
+            self.npm.run_and_log(*command_args)
         except subprocess.CalledProcessError as err:
             log_subprocess_error(f"npm {command_name}", err, "npm invocation failed")
             sys.exit(err.returncode)
@@ -77,11 +72,9 @@ class Evidence(ExtensionBase):
         )
 
     def build(self):
-        npm = self.get_invoker("npm")
-        npm.run_and_log(*["install", "--prefix", self.evidence_home])
-        npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
+        self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
+        self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
 
     def dev(self):
-        npm = self.get_invoker("npm")
-        npm.run_and_log(*["install", "--prefix", self.evidence_home])
-        npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
+        self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
+        self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
