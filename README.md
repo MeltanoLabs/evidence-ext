@@ -1,6 +1,19 @@
-# Evidence
+# evidence-ext
 
-Evidence is A meltano utility extension for Evidence.
+`evidence-ext` is A Meltano utility extension for [Evidence.dev](https://evidence.dev) 📊
+
+## Testing with Meltano
+
+This extension includes a sample Evidence project, along with a `meltano.yml` project file, allowing you to test Evidence with Meltano.
+
+```shell
+# install the Meltano project locally
+meltano install
+# run evidence in dev mode
+meltano invoke evidence dev
+# build the example evidence project
+meltano invoke evidence build
+```
 
 ## Installing this extension for local development
 

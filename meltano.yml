@@ -1,0 +1,33 @@
+version: 1
+default_environment: dev
+project_id: meltanolabs-evidence-ext
+environments:
+- name: dev
+- name: staging
+- name: prod
+plugins:
+  utilities:
+    - name: evidence
+      namespace: evidence
+      # pip_url: git+https://github.com/meltanolabs/evidence-ext.git@main
+      pip_url: .
+      executable: evidence_extension
+      commands:
+        describe:
+          executable: evidence_extension
+          args: describe
+        initialize:
+          executable: evidence_extension
+          args: initialize
+        invoke:
+          executable: evidence_extension
+          args: invoke
+      settings:
+        - name: extension.evidence_home
+          label: Evidence Home
+          value: $MELTANO_PROJECT_ROOT/analyze/evidence
+          env: EVIDENCE_HOME
+          description: |
+            The directory where Evidence will store its project, configuration, logs, and other files.
+      config:
+        extension.evidence_home: sample/
