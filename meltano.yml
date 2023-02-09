@@ -20,70 +20,92 @@ plugins:
           args: invoke
       settings:
         - name: home_dir
+          kind: string
           label: Evidence Home Dir
           value: $MELTANO_PROJECT_ROOT/analyze/evidence
           env: EVIDENCE_HOME
           description: |
             The directory where Evidence will store its project, configuration, logs, and other files.
         - name: settings.database
+          kind: string
           env: DATABASE
           value: duckdb  # sample project value
         # duckdb
         - name: settings.duckdb.filename
+          kind: string
           env: DUCKDB_FILENAME
           value: needful_things.duckdb  # sample project value
         - name: settings.duckdb.gitignore_duckdb
           value: DUCKDB_GITIGNOREDUCKDB
         # sqlite
         - name: settings.sqlite.filename
+          kind: string
           env: SQLITE_FILENAME
         # bigquery
         - name: settings.bigquery.project_id
+          kind: string
           env: BIGQUERY_PROJECT_ID
         - name: settings.bigquery.client_email
+          kind: string
           env: BIGQUERY_CLIENT_EMAIL
         - name: settings.bigquery.private_key
+          kind: password
           env: BIGQUERY_PRIVATE_KEY
         # mysql
         - name: settings.mysql.user
+          kind: string
           env: MYSQL_USER
         - name: settings.mysql.host
+          kind: string
           env: MYSQL_HOST
         - name: settings.mysql.database
+          kind: string
           env: MYSQL_DATABASE
         - name: settings.mysql.password
+          kind: password
           env: MYSQL_PASSWORD
         - name: settings.mysql.port
           env: MYSQL_PORT
         - name: settings.mysql.ssl
           env: MYSQL_SSL
         - name: settings.mysql.socket_path
+          kind: string
           env: MYSQL_SOCKETPATH
         # postgres / redshift
         - name: settings.postgres.user
+          kind: string
           env: POSTGRES_USER
         - name: settings.postgres.host
+          kind: string
           env: POSTGRES_HOST
         - name: settings.postgres.database
+          kind: string
           env: POSTGRES_DATABASE
         - name: settings.postgres.password
+          kind: password
           env: POSTGRES_PASSWORD
         - name: settings.postgres.port
           env: POSTGRES_PORT
         - name: settings.postgres.ssl
           env: POSTGRES_SSL
         - name: settings.postgres.connection_string
+          kind: password
           env: POSTGRES_CONNECTIONSTRING
         # snowflake
         - name: settings.snowflake.account
+          kind: string
           env: SNOWFLAKE_ACCOUNT
         - name: settings.snowflake.username
+          kind: string
           env: SNOWFLAKE_USERNAME
         - name: settings.snowflake.password
+          kind: password
           env: SNOWFLAKE_PASSWORD
         - name: settings.snowflake.database
+          kind: string
           env: SNOWFLAKE_DATABASE
         - name: settings.snowflake.warehouse
+          kind: string
           env: SNOWFLAKE_WAREHOUSE
       config:
         home_dir: $MELTANO_PROJECT_ROOT/sample/
