@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "evidence-ext"
-version = "0.0.1"
+version = "0.0.0"
 description = "`evidence-ext` is a Meltano utility extension."
 authors = ["Ken Payne"]
 license = "Apache 2.0"
+readme = "README.md"
 packages = [
     { include = "evidence_ext" }
     # uncomment this if you want to include static assets
@@ -29,8 +30,13 @@ isort = "^5.10.1"
 flake8 = "^3.9.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.8"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.8", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
 
 [tool.poetry.scripts]
 evidence_extension = 'evidence_ext.main:app'
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
