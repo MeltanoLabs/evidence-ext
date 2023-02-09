@@ -24,7 +24,7 @@ class Evidence(ExtensionBase):
         """Initialize the extension."""
         self.app_name = "evidence_extension"
         self.evidence_home = os.environ.get("EVIDENCE_HOME") or os.environ.get(
-            f"{self.app_name}_EVIDENCE_HOME"
+            "EVIDENCE_HOME_DIR"
         )
         if not self.evidence_home:
             log.debug("env dump", env=os.environ)

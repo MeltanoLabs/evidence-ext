@@ -16,4 +16,4 @@ jobs:
       - name: Install Meltano Project
         run: meltano install
       - name: Test Evidence Sample Build
-        run: meltano --environment=test --log-level=debug invoke evidence build
+        run: meltano invoke evidence build
