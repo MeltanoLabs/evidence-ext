@@ -76,6 +76,10 @@ plugins:
           env: SNOWFLAKE_DATABASE
         - name: settings.snowflake.warehouse
           env: SNOWFLAKE_WAREHOUSE
+      settings_group_validation:
+        - - home
+        - - home
+          - settings.database
       config:
         home_dir: $MELTANO_PROJECT_ROOT/sample/
         settings.database: duckdb
