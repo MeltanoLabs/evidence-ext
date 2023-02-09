@@ -27,9 +27,11 @@ plugins:
             The directory where Evidence will store its project, configuration, logs, and other files.
         - name: settings.database
           env: DATABASE
+          value: duckdb  # sample project value
         # duckdb
         - name: settings.duckdb.filename
           env: DUCKDB_FILENAME
+          value: needful_things.duckdb  # sample project value
         # sqlite
         - name: settings.sqlite.filename
           env: SQLITE_FILENAME
@@ -79,14 +81,8 @@ plugins:
           env: SNOWFLAKE_DATABASE
         - name: settings.snowflake.warehouse
           env: SNOWFLAKE_WAREHOUSE
-      settings_group_validation:
-        - - home
-        - - home
-          - settings.database
       config:
         home_dir: $MELTANO_PROJECT_ROOT/sample/
-        settings.database: duckdb
-        settings.duckdb.filename: needful_things.duckdb
 environments:
   - name: dev
   - name: staging
