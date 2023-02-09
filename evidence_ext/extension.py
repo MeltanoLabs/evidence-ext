@@ -1,6 +1,7 @@
 """Meltano Evidence extension."""
 from __future__ import annotations
 
+import contextlib
 import json
 import os
 import pkgutil
@@ -32,6 +33,14 @@ class Evidence(ExtensionBase):
                 "EVIDENCE_HOME not found in environment, unable to function without it"
             )
             sys.exit(1)
+
+        self.evidence_config_file = (
+            Path(self.evidence_home)
+            / ".evidence"
+            / "template"
+            / "evidence.settings.json"
+        )
+
         self.npm = Invoker("npm")
         self.npx = Invoker("npx")
 
@@ -56,16 +65,16 @@ class Evidence(ExtensionBase):
             )
 
     def _write_config(self):
-        config_file = (
-            Path(self.evidence_home)
-            / ".evidence"
-            / "template"
-            / "evidence.settings.json"
-        )
-        config_file.parent.mkdir(parents=True, exist_ok=True)
+        """Write Evidence config from env vars."""
+        self.evidence_config_file.parent.mkdir(parents=True, exist_ok=True)
         config = self._get_config()
-        with config_file.open("w", encoding="utf-8") as cf:
+        with self.evidence_config_file.open("w", encoding="utf-8") as cf:
             json.dump(config, cf)
+
+    def _cleanup_config(self):
+        """To prevent secrets leaking."""
+        if self.evidence_config_file.exists():
+            os.remove(self.evidence_config_file)
 
     def initialize(self, force: bool):
         """Initialize a new project."""
@@ -104,12 +113,18 @@ class Evidence(ExtensionBase):
             ]
         )
 
-    def build(self):
+    @contextlib.contextmanager
+    def config_file(self):
         self._write_config()
-        self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
-        self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
+        yield
+        self._cleanup_config()
+
+    def build(self):
+        with self.config_file():
+            self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
+            self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
 
     def dev(self):
-        self._write_config()
-        self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
-        self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
+        with self.config_file():
+            self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
+            self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
