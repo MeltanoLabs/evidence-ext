@@ -38,7 +38,7 @@ plugins:
           - settings.database
           - settings.credentials.filename
       config:
-        home_dir: sample/
+        home_dir: $MELTANO_PROJECT_ROOT/sample/
         settings.database: duckdb
         settings.credentials.filename: needful_things.duckdb
         settings.credentials.gitignore_duckdb: null
