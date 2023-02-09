@@ -21,7 +21,7 @@ python = "<3.12,>=3.7"
 PyYAML = "^6.0.0"
 click = "^8.1.3"
 typer = "^0.6.1"
-"meltano.edk"= {git = "https://github.com/meltano/edk.git", rev="main"}
+"meltano.edk"= "^0.3.0"
 nodejs-bin = {extras = ["cmd"], version = "^18.4.0a4"}
 
 [tool.poetry.dev-dependencies]
