@@ -53,6 +53,10 @@ class Evidence(ExtensionBase):
             command_args: The arguments to pass to the command.
         """
         try:
+            command_args = (
+                "--prefix",
+                self.evidence_home,
+            ) + command_args
             self._npm.run_and_log(*command_args)
         except subprocess.CalledProcessError as err:
             log_subprocess_error(f"npm {command_name}", err, "npm invocation failed")
@@ -74,11 +78,11 @@ class Evidence(ExtensionBase):
 
     def npm(self, *command_args: Any) -> None:
         try:
-            commands = (
+            command_args = (
                 "--prefix",
                 self.evidence_home,
             ) + command_args
-            self._npm.run_and_log(*commands)
+            self._npm.run_and_log(*command_args)
         except subprocess.CalledProcessError as err:
             log_subprocess_error("npm error", err, "npm invocation failed")
             sys.exit(err.returncode)
