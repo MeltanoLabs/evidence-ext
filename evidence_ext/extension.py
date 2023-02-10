@@ -32,13 +32,13 @@ class Evidence(ExtensionBase):
             )
             sys.exit(1)
         self.config = EvidenceConfig(evidence_home=self.evidence_home)
-        self.npm = Invoker("npm")
-        self.npx = Invoker("npx")
+        self._npm = Invoker("npm")
+        self._npx = Invoker("npx")
 
     def initialize(self, force: bool):
         """Initialize a new project."""
         try:
-            self.npx.run_and_log(
+            self._npx.run_and_log(
                 *["degit", "evidence-dev/template", self.evidence_home]
             )
         except subprocess.CalledProcessError as err:
@@ -53,7 +53,7 @@ class Evidence(ExtensionBase):
             command_args: The arguments to pass to the command.
         """
         try:
-            self.npm.run_and_log(*command_args)
+            self._npm.run_and_log(*command_args)
         except subprocess.CalledProcessError as err:
             log_subprocess_error(f"npm {command_name}", err, "npm invocation failed")
             sys.exit(err.returncode)
@@ -72,14 +72,21 @@ class Evidence(ExtensionBase):
             ]
         )
 
+    def npm(self, *command_args: Any) -> None:
+        try:
+            self._npm.run_and_log(*command_args)
+        except subprocess.CalledProcessError as err:
+            log_subprocess_error("npm error", err, "npm invocation failed")
+            sys.exit(err.returncode)
+
     def build(self):
         """Run 'npm run build' in the Evidence home dir."""
         with self.config.suppress_config_file():
-            self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
-            self.npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
+            self._npm.run_and_log(*["install", "--prefix", self.evidence_home])
+            self._npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
 
     def dev(self):
         """Run 'npm run dev' in the Evidence home dir."""
         with self.config.suppress_config_file():
-            self.npm.run_and_log(*["install", "--prefix", self.evidence_home])
-            self.npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
+            self._npm.run_and_log(*["install", "--prefix", self.evidence_home])
+            self._npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
