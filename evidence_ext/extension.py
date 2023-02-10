@@ -77,6 +77,7 @@ class Evidence(ExtensionBase):
         )
 
     def npm(self, *command_args: Any) -> None:
+        """Run 'npm' inside Evidence home with args."""
         try:
             command_args = (
                 "--prefix",
@@ -90,11 +91,11 @@ class Evidence(ExtensionBase):
     def build(self):
         """Run 'npm run build' in the Evidence home dir."""
         with self.config.suppress_config_file():
-            self._npm.run_and_log(*["install", "--prefix", self.evidence_home])
-            self._npm.run_and_log(*["run", "build", "--prefix", self.evidence_home])
+            self._npm.run_and_log(*["--prefix", self.evidence_home, "install"])
+            self._npm.run_and_log(*["--prefix", self.evidence_home, "run", "build"])
 
     def dev(self):
         """Run 'npm run dev' in the Evidence home dir."""
         with self.config.suppress_config_file():
-            self._npm.run_and_log(*["install", "--prefix", self.evidence_home])
-            self._npm.run_and_log(*["run", "dev", "--prefix", self.evidence_home])
+            self._npm.run_and_log(*["--prefix", self.evidence_home, "install"])
+            self._npm.run_and_log(*["--prefix", self.evidence_home, "run", "dev"])

@@ -102,14 +102,14 @@ def describe(
     context_settings={"allow_extra_args": True, "ignore_unknown_options": True}
 )
 def npm(ctx: typer.Context, command_args: List[str]) -> None:
-    return ext.npm(*command_args)
+    ext.npm(*command_args)
 
 
 @app.command()
-def build(ctx: typer.Context):
-    return ext.build()
+def build(ctx: typer.Context) -> None:
+    ext.build()
 
 
 @app.command()
-def dev(ctx: typer.Context):
-    return ext.dev()
+def dev(ctx: typer.Context) -> None:
+    ext.dev()
