@@ -107,9 +107,12 @@ def npm(ctx: typer.Context, command_args: List[str]) -> None:
 
 
 @app.command()
-def build(ctx: typer.Context) -> None:
+def build(
+    ctx: typer.Context,
+    strict: bool = typer.Option(False, "--strict", help="build:strict"),
+) -> None:
     """Build the Evidence project."""
-    ext.build()
+    ext.build(strict=strict)
 
 
 @app.command()

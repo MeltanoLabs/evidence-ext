@@ -19,6 +19,12 @@ plugins:
         initialize:
           executable: evidence_extension
           args: initialize
+        build:
+          executable: evidence_extension
+          args: build
+        build-strict:
+          executable: evidence_extension
+          args: build --strict
       settings_group_validation:
         - - home_dir
         # duckdb
@@ -69,6 +75,16 @@ plugins:
           env: EVIDENCE_HOME
           description: |
             The directory where Evidence will store its project, configuration, logs, and other files.
+        - name: send_anonymous_usage_stats
+          label: Send Anonymous Usage Stats
+          kind: options
+          env: SEND_ANONYMOUS_USAGE_STATS
+          description: |
+            Send Evidence anonymous usage stats.
+          options:
+            - value: 'yes'
+            - value: 'no'
+          value: 'yes'
         - name: settings.database
           kind: options
           env: DATABASE
