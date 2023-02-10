@@ -27,8 +27,18 @@ plugins:
           description: |
             The directory where Evidence will store its project, configuration, logs, and other files.
         - name: settings.database
-          kind: string
+          kind: options
           env: DATABASE
+          options:
+          # https://github.com/evidence-dev/evidence/blob/9b1dd45b4c90d379ea7cd2f1a525b6025364d4bc/sites/example-project/src/components/ui/Databases/DatabaseSettingsPanel.svelte#L25-L32
+          - bigquery
+          - postgres
+          - mysql
+          - redshift
+          - snowflake
+          - sqlite
+          - duckdb
+          - csv
           value: duckdb  # sample project value
         # duckdb
         - name: settings.duckdb.filename
