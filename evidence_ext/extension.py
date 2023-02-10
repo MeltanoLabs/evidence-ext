@@ -74,7 +74,11 @@ class Evidence(ExtensionBase):
 
     def npm(self, *command_args: Any) -> None:
         try:
-            self._npm.run_and_log(*command_args)
+            commands = (
+                "--prefix",
+                self.evidence_home,
+            ) + command_args
+            self._npm.run_and_log(*commands)
         except subprocess.CalledProcessError as err:
             log_subprocess_error("npm error", err, "npm invocation failed")
             sys.exit(err.returncode)
