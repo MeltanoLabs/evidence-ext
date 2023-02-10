@@ -108,7 +108,7 @@ def npm(ctx: typer.Context, command_args: List[str]) -> None:
 
 @app.command()
 def build(ctx: typer.Context) -> None:
-    """Build the evidence project."""
+    """Build the Evidence project."""
     ext.build()
 
 
