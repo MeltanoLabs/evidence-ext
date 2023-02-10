@@ -88,11 +88,16 @@ class Evidence(ExtensionBase):
             log_subprocess_error("npm error", err, "npm invocation failed")
             sys.exit(err.returncode)
 
-    def build(self):
+    def build(self, strict: bool = False):
         """Run 'npm run build' in the Evidence home dir."""
         with self.config.suppress_config_file():
             self._npm.run_and_log(*["--prefix", self.evidence_home, "install"])
-            self._npm.run_and_log(*["--prefix", self.evidence_home, "run", "build"])
+            build_cmds = ["--prefix", self.evidence_home, "run"]
+            if strict:
+                build_cmds.append("build:strict")
+            else:
+                build_cmds.append("build")
+            self._npm.run_and_log(*build_cmds)
 
     def dev(self):
         """Run 'npm run dev' in the Evidence home dir."""
