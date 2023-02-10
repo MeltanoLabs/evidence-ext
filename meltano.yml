@@ -19,9 +19,6 @@ plugins:
         initialize:
           executable: evidence_extension
           args: initialize
-        invoke:
-          executable: evidence_extension
-          args: invoke
       settings_group_validation:
         - - home_dir
         # duckdb
