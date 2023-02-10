@@ -98,11 +98,21 @@ def describe(
         sys.exit(1)
 
 
+@app.command(
+    context_settings={"allow_extra_args": True, "ignore_unknown_options": True}
+)
+def npm(ctx: typer.Context, command_args: List[str]) -> None:
+    """Run npm commands inside the Evidence project directory."""
+    ext.npm(*command_args)
+
+
 @app.command()
-def build(ctx: typer.Context):
+def build(ctx: typer.Context) -> None:
+    """Build the Evidence project."""
     ext.build()
 
 
 @app.command()
-def dev(ctx: typer.Context):
+def dev(ctx: typer.Context) -> None:
+    """Launch the Evidence dev server."""
     ext.dev()
