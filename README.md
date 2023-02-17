@@ -1,5 +1,8 @@
 # evidence-ext
 
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/MeltanoLabs/evidence-ext/main.svg)](https://results.pre-commit.ci/latest/github/MeltanoLabs/evidence-ext/main)
+
 `evidence-ext` is A Meltano utility extension for [Evidence.dev](https://evidence.dev) 📊
 
 ## Testing with Meltano

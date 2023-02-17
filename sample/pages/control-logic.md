@@ -17,7 +17,7 @@ You can use `{#each}` statements to loop through **each row** of a query, and ge
 ## Sales by Category
 
 {#each category_sales as category_row}
-- {category_row.category}: 
+- {category_row.category}:
 
 
 {/each}
@@ -45,15 +45,15 @@ Use `{#if}` and `{:else}` statements to control what content is show to users ba
 {#if orders_per_day[0].sales_usd>3000}
 
 Met sales target
-on <Value data={orders_per_day} column=date row=0 />:  
+on <Value data={orders_per_day} column=date row=0 />:
 <Value data={orders_per_day} column=sales_usd row=0 /> / $3,000
 
 Hooray! 🥳🥳🥳
 
 {:else}
 
-Missed sales target 
-on <Value data={orders_per_day} column=date row=0 /> 😞: 
+Missed sales target
+on <Value data={orders_per_day} column=date row=0 /> 😞:
 <Value data={orders_per_day} column=sales_usd row=0 /> / $3,000
 
 {/if}

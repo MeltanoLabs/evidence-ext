@@ -36,11 +36,11 @@ You can see both the SQL and the query results by interacting with the query abo
 `where order_datetime >= '2021-01-01'`
 
 ## Include Values in Text
-Return values from queries in text: 
+Return values from queries in text:
 
 Last month customers placed <Value data={orders_by_month} column=number_of_orders/> orders.
 
-Sometimes you need something *bigger*: 
+Sometimes you need something *bigger*:
 <BigValue data={orders_by_month} value=sales_usd0k />
 
 👉 Add another `<BigValue/>` above showing `average_order_value_usd2`.
@@ -57,10 +57,10 @@ Evidence supports using conditionals & loops to determine what text and data is 
 
 <BigLink href="/control-logic">Using Control Logic &rarr;</BigLink>
 
-# Share your Project 
+# Share your Project
 To get your project online, see the deployment instructions in the [settings menu](/settings). More info is available in our [docs](https://docs.evidence.dev/deployment/deployment-overview).
 
-If you would prefer not to self-host your project, you might be interested in our upcoming cloud service, [Evidence Cloud](https://du3tapwtcbi.typeform.com/to/kwp7ZD3q). 
+If you would prefer not to self-host your project, you might be interested in our upcoming cloud service, [Evidence Cloud](https://du3tapwtcbi.typeform.com/to/kwp7ZD3q).
 
 # Get Support 💬
 - Message us on [Slack](https://join.slack.com/t/evidencedev/shared_invite/zt-uda6wp6a-hP6Qyz0LUOddwpXW5qG03Q)
