@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write  # Needed to upload artifacts to the release
+  id-token: write  # Needed for OIDC PyPI publishing
+
 jobs:
   build_deploy:
 
@@ -35,6 +39,5 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
-    - name: Deploy to PyPI
-      run: |
-        poetry publish -u "__token__" -p "${{ secrets.PYPI_TOKEN }}"
+    - name: Publish
+      uses: pypa/gh-action-pypi-publish@v1.8.5
