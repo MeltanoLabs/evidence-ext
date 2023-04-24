@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import sys
+import typing as t
 
 import structlog
 import typer
@@ -87,7 +88,7 @@ def initialize(
 @app.command(
     context_settings={"allow_extra_args": True, "ignore_unknown_options": True},
 )
-def invoke(ctx: typer.Context, command_args: list[str]) -> None:  # noqa: ARG001
+def invoke(ctx: typer.Context, command_args: t.List[str]) -> None:  # noqa: ARG001
     """Invoke the plugin.
 
     Note: that if a command argument is a list, such as command_args,
@@ -125,7 +126,7 @@ def describe(
 @app.command(
     context_settings={"allow_extra_args": True, "ignore_unknown_options": True},
 )
-def npm(ctx: typer.Context, command_args: list[str]) -> None:  # noqa: ARG001
+def npm(ctx: typer.Context, command_args: t.List[str]) -> None:  # noqa: ARG001
     """Run npm commands inside the Evidence project directory."""
     ext.npm(*command_args)
 
@@ -148,3 +149,7 @@ def build(
 def dev(ctx: typer.Context) -> None:  # noqa: ARG001
     """Launch the Evidence dev server."""
     ext.dev()
+
+
+if __name__ == "__main__":
+    app()
