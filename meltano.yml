@@ -264,7 +264,7 @@ plugins:
       kind: string
       value: false
       label: Port
-    - name: settings.mssql.encrypt
+    - name: settings.mssql.options.encrypt
       env: MSSQL_ENCRYPT
       kind: string
       value: true
