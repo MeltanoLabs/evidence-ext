@@ -253,8 +253,8 @@ plugins:
       env: MSSQL_PASSWORD
       kind: password
       label: MSSQL Password
-    - name: settings.mssql.trust_server_certificate
-      env: MSSQL_CERTIFICATE
+    - name: settings.mssql.options.trust_server_certificate
+      env: MSSQL_TRUST_SERVER_CERTIFICATE
       kind: string
       label: Trust server certificate
       description: |
