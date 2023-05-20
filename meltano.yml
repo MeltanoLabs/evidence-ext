@@ -286,12 +286,3 @@ plugins:
         executable: evidence_extension
     config:
       home_dir: $MELTANO_PROJECT_ROOT/sample/
-      settings:
-        database: mssql
-        mssql:
-          host: 10.1.1.6
-          database: Operations
-          user: JacobMSQL
-          trust_server_certificate: true
-          port: 1433
-          encrypt: true
