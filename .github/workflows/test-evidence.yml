@@ -1,5 +1,8 @@
 name: test-evidence
-on: [push]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
 jobs:
   build-sample-project:
     runs-on: ubuntu-latest
@@ -15,5 +18,7 @@ jobs:
           pipx install meltano
       - name: Install Meltano Project
         run: meltano install
+      - name: Print Evidence config
+        run: meltano config evidence
       - name: Test Evidence Sample Build
         run: meltano invoke evidence build
