@@ -33,7 +33,7 @@ def get_env_var(*names: str) -> str:
     for name in names:
         try:
             var = os.environ[name]
-        except KeyError:
+        except KeyError:  # noqa: PERF203
             continue
         else:
             break

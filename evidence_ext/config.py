@@ -128,7 +128,7 @@ class EvidenceConfig:
         for env_var in env_vars:
             try:
                 os.environ[env_var]
-            except KeyError as e:
+            except KeyError as e:  # noqa: PERF203
                 raise MissingEnvVarError(env_var, self.database) from e
 
     def _get_config_duckdb_sqlite(self) -> dict:
