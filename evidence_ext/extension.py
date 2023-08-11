@@ -135,4 +135,20 @@ class Evidence(ExtensionBase):
         """Run 'npm run dev' in the Evidence home dir."""
         with self.config.suppress_config_file():
             self._npm.run_and_log(*["--prefix", self.evidence_home, "install"])
-            self._npm.run_and_log(*["--prefix", self.evidence_home, "run", "dev"])
+            self._npm.run_and_log(*["--prefix", self.evidence_home, "run", "dev","--","--host","0.0.0.0"])
+
+    def upgrade(self, *command_args: ExecArg) -> None:
+        """Run 'npm' inside Evidence home with install (upgrade) args."""
+        try:
+            command_args = ([
+                "--prefix",
+                self.evidence_home,
+                "install",
+                "@evidence-dev/evidence@latest",
+                "@evidence-dev/core-components@latest"
+            ]
+            )
+            self._npm.run_and_log(*command_args)
+        except subprocess.CalledProcessError as err:
+            log_subprocess_error("npm", err, "npm invocation failed")
+            sys.exit(err.returncode)

@@ -284,5 +284,8 @@ plugins:
       build-strict:
         args: build --strict
         executable: evidence_extension
+      upgrade: 
+        args: upgrade
+        executable: evidence_extension
     config:
       home_dir: $MELTANO_PROJECT_ROOT/sample/
