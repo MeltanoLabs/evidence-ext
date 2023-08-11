@@ -22,7 +22,7 @@ meltano invoke evidence build
 
 ## Upgrading Evidence Versions
 
-From time to time you may need to upgrade the version of an evidence project. 
+From time to time you may need to upgrade the version of an evidence project.
 
 ```shell
 # install latest version of evidence

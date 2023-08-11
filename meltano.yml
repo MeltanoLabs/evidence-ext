@@ -284,7 +284,7 @@ plugins:
       build-strict:
         args: build --strict
         executable: evidence_extension
-      upgrade: 
+      upgrade:
         args: upgrade
         executable: evidence_extension
     config:
