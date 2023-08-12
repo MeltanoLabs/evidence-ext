@@ -143,7 +143,7 @@ class Evidence(ExtensionBase):
                     "dev",
                     "--",
                     "--host",
-                    "0.0.0.0",
+                    "0.0.0.0",  # noqa: S104
                 ],
             )
 
