@@ -151,5 +151,11 @@ def dev(ctx: typer.Context) -> None:  # noqa: ARG001
     ext.dev()
 
 
+@app.command()
+def upgrade(ctx: typer.Context) -> None:  # noqa: ARG001
+    """Run npm install (upgrade) inside the Evidence project directory."""
+    ext.upgrade()
+
+
 if __name__ == "__main__":
     app()
