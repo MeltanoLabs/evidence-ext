@@ -147,7 +147,7 @@ class Evidence(ExtensionBase):
                 ],
             )
 
-    def upgrade(self, *command_args: ExecArg) -> None:
+    def upgrade(self) -> None:
         """Run 'npm' inside Evidence home with install (upgrade) args."""
         try:
             command_args = [
