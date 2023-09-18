@@ -24,7 +24,7 @@ repos:
   - id: isort
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.10.1
+  rev: v3.11.0
   hooks:
   - id: pyupgrade
     args: [--py37-plus]
@@ -35,7 +35,7 @@ repos:
   - id: mypy
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.0.287
+  rev: v0.0.290
   hooks:
   - id: ruff
     args: ["--fix"]
