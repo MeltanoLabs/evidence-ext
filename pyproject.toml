@@ -28,22 +28,24 @@ vcs = "git"
 style = "semver"
 
 [tool.ruff]
+line-length = 88
+src = ["src", "tests", "docs"]
+target-version = "py38"
+
+[tool.ruff.lint]
 ignore = [
     "ANN101", # missing-type-self
     "DJ",     # flake8-django
     "PD",     # pandas-vet
     "UP006",  # Use list/dict/etc. instead of t.List/t.Dist/etc. for type annotations (PEP 585)
 ]
-line-length = 88
 select = ["ALL"]
-src = ["src", "tests", "docs"]
-target-version = "py37"
 
-[tool.ruff.flake8-bugbear]
+[tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["typer.Option"]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["evidence_ext"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
