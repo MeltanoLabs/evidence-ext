@@ -19,13 +19,13 @@ repos:
   - id: mypy
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.4.8
+  rev: v0.4.9
   hooks:
   - id: ruff
     args: ["--fix"]
   - id: ruff-format
 
 - repo: https://github.com/pycqa/flake8
-  rev: '7.0.0'
+  rev: '7.1.0'
   hooks:
   - id: flake8
