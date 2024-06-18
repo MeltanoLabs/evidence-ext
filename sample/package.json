@@ -15,7 +15,7 @@
   "dependencies": {
     "@evidence-dev/components": "^2.5.1",
     "@evidence-dev/core-components": "^2.0.1",
-    "@evidence-dev/evidence": "^21.0.3",
+    "@evidence-dev/evidence": "^38.0.1",
     "@evidence-dev/preprocess": "^3.1.1"
   },
   "overrides": {
