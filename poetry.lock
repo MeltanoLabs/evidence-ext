@@ -124,23 +124,23 @@ files = [
 
 [[package]]
 name = "meltano-edk"
-version = "0.4.2"
+version = "0.4.3"
 description = "A framework for building Meltano extensions"
 optional = false
-python-versions = "<4,>=3.8"
+python-versions = ">=3.8"
 files = [
-    {file = "meltano_edk-0.4.2-py3-none-any.whl", hash = "sha256:28c40e0cd4b502db5af4beeade53030a7a6644a61e5596bbee5740e2954caa5e"},
-    {file = "meltano_edk-0.4.2.tar.gz", hash = "sha256:6136f843082546ec3aa69607b878d308c99742597d803bcb1b28dac4cc07f9e1"},
+    {file = "meltano_edk-0.4.3-py3-none-any.whl", hash = "sha256:d216468bef2e1c91ea25b4a5caa9fb139238efa5db22dcf31e1f09377be7fe23"},
+    {file = "meltano_edk-0.4.3.tar.gz", hash = "sha256:bec1ac1565693ec77da6c34610575830a8c487a30d3db36e3ae323ebfbd884de"},
 ]
 
 [package.dependencies]
 devtools = ">=0.9.0,<1"
 pydantic = ">=2,<3"
-PyYAML = ">=6.0.0,<7.0.0"
+PyYAML = ">=6,<7"
 structlog = ">=21,<25"
 
 [package.extras]
-docs = ["furo (>=2022.12.7,<2025.0.0)", "myst-parser (>=0.17.2,<3.1.0)", "sphinx (>=4.5,<8.0)", "sphinx-autobuild (>=2021.3.14,<2022.0.0)", "sphinx-copybutton (>=0.3.1,<0.6.0)"]
+docs = ["furo (>=2022.12.7,<2025.0.0)", "myst-parser (>=0.17.2,<3.1.0)", "sphinx (>=4.5,<9.0)", "sphinx-autobuild (>=2021.3.14,<2022.0.0)", "sphinx-copybutton (>=0.3.1,<0.6.0)"]
 
 [[package]]
 name = "nodejs-bin"
