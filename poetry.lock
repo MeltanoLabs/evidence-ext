@@ -124,13 +124,13 @@ files = [
 
 [[package]]
 name = "meltano-edk"
-version = "0.4.3"
+version = "0.4.4"
 description = "A framework for building Meltano extensions"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "meltano_edk-0.4.3-py3-none-any.whl", hash = "sha256:d216468bef2e1c91ea25b4a5caa9fb139238efa5db22dcf31e1f09377be7fe23"},
-    {file = "meltano_edk-0.4.3.tar.gz", hash = "sha256:bec1ac1565693ec77da6c34610575830a8c487a30d3db36e3ae323ebfbd884de"},
+    {file = "meltano_edk-0.4.4-py3-none-any.whl", hash = "sha256:ca0db2054ca6831ada0ba764445d3e776c29b2cc9c04489994b38399e1ac1de4"},
+    {file = "meltano_edk-0.4.4.tar.gz", hash = "sha256:ab6a50510bb616a8b90007f0af88f186aaae9ee48f79737cc54812da4b4836cc"},
 ]
 
 [package.dependencies]
