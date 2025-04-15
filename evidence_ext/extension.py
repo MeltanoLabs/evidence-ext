@@ -65,7 +65,24 @@ class Evidence(ExtensionBase):
             CalledProcessError: If the initialization fails.
         """
         try:
-            self._npx.run_and_log("degit", "evidence-dev/template", self.evidence_home)
+            command_args = (
+                "--prefix",
+                self.evidence_home,
+                "install",
+                "--quiet",
+                "--no-progress",
+                "--no-audit",
+                "degit",
+            )
+            self._npm.run_and_log(*command_args)
+            # force is needed here as installing degit creates the destination directory
+            # and it's safe to overwrite it
+            self._npx.run_and_log(
+                "degit",
+                "--force",
+                "evidence-dev/template",
+                self.evidence_home,
+            )
         except subprocess.CalledProcessError as err:
             log_subprocess_error("npx degit", err, "npx degit failed")
             sys.exit(err.returncode)
