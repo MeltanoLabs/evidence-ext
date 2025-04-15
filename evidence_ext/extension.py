@@ -78,7 +78,10 @@ class Evidence(ExtensionBase):
             # force is needed here as installing degit creates the destination directory
             # and it's safe to overwrite it
             self._npx.run_and_log(
-                "degit", "--force", "evidence-dev/template", self.evidence_home
+                "degit",
+                "--force",
+                "evidence-dev/template",
+                self.evidence_home,
             )
         except subprocess.CalledProcessError as err:
             log_subprocess_error("npx degit", err, "npx degit failed")
