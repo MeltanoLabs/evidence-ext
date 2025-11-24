@@ -32,7 +32,7 @@ jobs:
         poetry dynamic-versioning --no-cache
         poetry build
     - name: Upload wheel to release
-      uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # 2.9.0
+      uses: svenstaro/upload-release-action@6b7fa9f267e90b50a19fef07b3596790bb941741 # 2.11.3
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: dist/*.whl
